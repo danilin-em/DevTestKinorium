@@ -6,5 +6,49 @@
 </head>
 <body>
 
+<button id="reload">Reload</button>
+
+<ul id="moviesTree"></ul>
+
+<script src="js/tree.js"></script>
+<script>
+    const Ajax = (uri) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        return new Promise(function (resolve, reject) {
+            xhr.onload = (e) => {
+                console.info(xhr.response);
+                if (xhr.response.error) {
+                    reject(xhr.response.error);
+                } else {
+                    resolve(xhr.response);
+                }
+            };
+            xhr.onerror = (e) => {
+                console.error(e);
+                reject(e);
+            };
+            xhr.open("GET", uri);
+            xhr.send();
+        });
+    };
+    const GetMovies = () => {
+        // TODO use config instead hardcode
+        return Ajax('http://localhost:8080/getmovies.php');
+    };
+    const TreeBuilder = (root, items) => {
+    };
+    const init = () => {
+        const moviesTree = document.getElementById('moviesTree');
+        GetMovies().then(movies => {
+            console.log(movies);
+            TreeBuilder(moviesTree, movies);
+            // TODO: use promise to catch moment for Tree registry
+            Tree(moviesTree);
+        });
+    };
+    window.addEventListener('DOMContentLoaded', init);
+    document.getElementById('reload').addEventListener('click', init);
+</script>
 </body>
 </html>
