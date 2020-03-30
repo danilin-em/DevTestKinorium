@@ -1,4 +1,7 @@
 const Tree = function (el) {
+    if (!el) {
+        return;
+    }
     const li_ul = el.querySelectorAll('li>ul');
     for (const x of li_ul) {
         x.style.display = 'none';
