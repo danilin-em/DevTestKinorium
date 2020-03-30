@@ -124,9 +124,9 @@ INSERT INTO movie (title) VALUES ('Jazz'),
     ('Buying the Cow'),
     ('Dad Savage'),
     ('No Strings Attached'),
-    ('Your Sister''s Sister'),
+    ('Your Sister\'s Sister'),
     ('Pretty in Pink'),
     ('On His Own (a.k.a. My Apprenticeship) (V lyudyakh)');
 
-INSERT INTO pictures (movie_id) VALUES (6), (3), (8), (5), (7), (9), (10);
+INSERT INTO pictures (movie_id) VALUES (1), (1), (1), (2), (3), (10), (10);
 ```
