@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree CSS</title>
+    <style>
+        .tree li > ul {
+            display: none;
+        }
+        .tree li:hover > ul {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="tree">
+    <li><span>фильмы</span>
+        <ul>
+            <li><span>фильмы с кадрами</span>
+                <ul>
+                    <li><span>Терминатор</span>
+                        <ul>
+                            <li><span>Терминатор</span></li>
+                            <li><span>Терминатор 2</span></li>
+                        </ul>
+                    </li>
+                    <li><span>Троя</span></li>
+                    <li><span>Матрица</span></li>
+                </ul>
+            </li>
+            <li><span>фильмы без кадров</span>
+                <ul>
+                    <li><span>Силиконовая долина</span></li>
+                    <li><span>Вавилон 5</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+</body>
+</html>

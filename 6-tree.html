@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree JS</title>
+</head>
+<body>
+
+<ul id="filmsTree"></ul>
+
+<script>
+    const Tree = function (el) {
+        const li_ul = el.querySelectorAll('li>ul');
+        for (const x of li_ul) {
+            x.style.display = 'none';
+            x.parentNode.addEventListener('mouseenter', () => {
+                x.style.display = 'block';
+            });
+            x.parentNode.addEventListener('mouseleave', () => {
+                x.style.display = 'none';
+            });
+        }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        Tree(document.getElementById('filmsTree'));
+    });
+</script>
+</body>
+</html>

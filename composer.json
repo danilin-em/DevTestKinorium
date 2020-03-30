@@ -1,0 +1,17 @@
+{
+    "name": "max/dev-test-kinorium",
+    "authors": [
+        {
+            "name": "Evgenii Danilin",
+            "email": "evgenii.danilin.m@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DataBase\\": "src/DataBase",
+            "SelectBox\\": "src/SelectBox",
+            "Html\\": "src/Html"
+        }
+    },
+    "require": {}
+}

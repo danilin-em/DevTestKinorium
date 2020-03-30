@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree JS</title>
+</head>
+<body>
+
+<ul id="filmsTree">
+    <li><span>фильмы</span>
+        <ul>
+            <li><span>фильмы с кадрами</span>
+                <ul>
+                    <li><span>Терминатор</span>
+                        <ul>
+                            <li><span>Терминатор</span></li>
+                            <li><span>Терминатор 2</span></li>
+                        </ul>
+                    </li>
+                    <li><span>Троя</span></li>
+                    <li><span>Матрица</span>
+                        <ul>
+                            <li><span>Матрица</span></li>
+                            <li><span>Матрица 2</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><span>фильмы без кадров</span>
+                <ul>
+                    <li><span>Силиконовая долина</span></li>
+                    <li><span>Вавилон 5</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    const Tree = function (el) {
+        const li_ul = el.querySelectorAll('li>ul');
+        for (const x of li_ul) {
+            x.style.display = 'none';
+            x.parentNode.addEventListener('mouseenter', () => {
+                x.style.display = 'block';
+            });
+            x.parentNode.addEventListener('mouseleave', () => {
+                x.style.display = 'none';
+            });
+        }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        Tree(document.getElementById('filmsTree'));
+    });
+</script>
+</body>
+</html>
