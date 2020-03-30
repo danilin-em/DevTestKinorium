@@ -79,9 +79,11 @@ LIMIT 10;
 
 ## 5. Тест задание JavaScript: Написать раскрывающееся дерево любым способам
 
-> [Листинг ././5-tree-css.html](./5-tree-css.html) и [Листинг ./5-tree.html](./5-tree.html)
+> [Пример JS](./public/example-tree.html) и [Пример CSS](./public/example-tree-css.html)
 
 ## 6. Все собрать в работающую страницу, выводящую дерево с перечнем фильмов с кадрами и без
+
+> [Пример](./public/index.html) 
 
 ```text
 фильмы|
