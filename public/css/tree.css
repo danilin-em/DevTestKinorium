@@ -1,0 +1,6 @@
+.tree li > ul {
+    display: none;
+}
+.tree li:hover > ul {
+    display: block;
+}
