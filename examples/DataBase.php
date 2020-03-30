@@ -6,16 +6,17 @@ use DataBase\DataBase;
 use DataBase\DataBaseInitException;
 
 try {
+    // TODO: use config instead hardcode
     DataBase::init(sprintf('mysql:host=%s;dbname=%s', '127.0.0.1', 'app'), 'app', 'app');
 } catch (DataBaseInitException $e) {
-    echo 'Sorry... Could not connect to mysql server.';
-    exit(1);
+    exit('Sorry... Could not connect to mysql server.'); // TODO: use logger
 }
 
 $result = [];
 
+// TODO: catch PDOException
 $result['movies'] = DataBase::instance()
-    ->query('SELECT * FROM movie LIMIT 5;') // TODO: catch PDOException
+    ->query('SELECT * FROM movie LIMIT 5;') // TODO: drop magick number
     ->fetchAll(PDO::FETCH_ASSOC);
 
 $movieSearchById = DataBase::instance()->prepare('SELECT * FROM movie WHERE movie_id = :id;');
@@ -29,8 +30,7 @@ $movieSearchById->execute([':id' => 1]); // TODO: catch PDOException
 $result['searched'][] = $movieSearchById->fetchAll(PDO::FETCH_ASSOC);
 
 try {
-    exit(json_encode($result, JSON_THROW_ON_ERROR, 4));
+    exit(json_encode($result, JSON_THROW_ON_ERROR, 4)); // TODO: drop magick number
 } catch (JsonException $e) {
-    echo 'Oh no! We had Encode problem here.';
-    exit(1);
+    exit('Oh no! We had Encode problem here.'); // TODO: use logger
 }
