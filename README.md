@@ -22,7 +22,7 @@
 
 ```regexp
 
-/<a\s+class=\"link-info-movie-type-film\"\s+data-id="(\d+)"[^<]+<h3>([^<]+)<[^<]+<h4>([^<]+)/gm
+/<a\s+class="link-info-movie-type-film"\s+data-id="(\d+)"[^<]+<h3>([^<]+)<[^<]+<h4>([^<]+)/gm
 
 ```
 
