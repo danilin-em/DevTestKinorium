@@ -14,16 +14,18 @@ try {
 
 $result = [];
 
-$result['movies'] = DataBase::instance()->query('SELECT * FROM movie LIMIT 5;')->fetchAll(PDO::FETCH_ASSOC);
+$result['movies'] = DataBase::instance()
+    ->query('SELECT * FROM movie LIMIT 5;') // TODO: catch PDOException
+    ->fetchAll(PDO::FETCH_ASSOC);
 
 $movieSearchById = DataBase::instance()->prepare('SELECT * FROM movie WHERE movie_id = :id;');
 
 $result['searched'] = [];
 
-$movieSearchById->execute([':id' => 4]);
+$movieSearchById->execute([':id' => 4]); // TODO: catch PDOException
 $result['searched'][] = $movieSearchById->fetchAll(PDO::FETCH_ASSOC);
 
-$movieSearchById->execute([':id' => 1]);
+$movieSearchById->execute([':id' => 1]); // TODO: catch PDOException
 $result['searched'][] = $movieSearchById->fetchAll(PDO::FETCH_ASSOC);
 
 try {
