@@ -98,3 +98,35 @@ LIMIT 10;
                          - Силиконовая долина
                          - Вавилон 5
 ```
+
+### Data
+
+```sql
+DROP TABLE IF EXISTS movie;
+DROP TABLE IF EXISTS pictures;
+
+CREATE TABLE movie (
+    movie_id int(5) unsigned NOT NULL AUTO_INCREMENT,
+    title varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    PRIMARY KEY (movie_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8;
+
+CREATE TABLE pictures (
+    picture_id int(5) unsigned NOT NULL AUTO_INCREMENT,
+    movie_id int(5) unsigned NOT NULL,
+    PRIMARY KEY (picture_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+INSERT INTO movie (title) VALUES ('Jazz'),
+    ('Never on Sunday (Pote tin Kyriaki)'),
+    ('Total Recall'),
+    ('Nutcracker, The'),
+    ('Buying the Cow'),
+    ('Dad Savage'),
+    ('No Strings Attached'),
+    ('Your Sister''s Sister'),
+    ('Pretty in Pink'),
+    ('On His Own (a.k.a. My Apprenticeship) (V lyudyakh)');
+
+INSERT INTO pictures (movie_id) VALUES (6), (3), (8), (5), (7), (9), (10);
+```
