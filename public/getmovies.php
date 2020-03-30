@@ -23,7 +23,18 @@ try {
 }
 
 $movieSearch = DataBase::instance()
-    ->prepare('SELECT movie_id as id, title FROM movie LIMIT :offset, :limit;'); // TODO: use col name mapping
+    ->prepare('
+SELECT 
+   m.movie_id AS id, 
+   m.title, 
+   COUNT(p.picture_id) AS pictures
+FROM movie m
+LEFT JOIN pictures p
+    ON m.movie_id = p.movie_id
+GROUP BY id
+ORDER BY pictures
+LIMIT :offset, :limit;
+'); // TODO: use col name mapping
 
 $movieSearch->bindValue(':offset', MOVIES_OFFSET, PDO::PARAM_INT);
 $movieSearch->bindValue(':limit', MOVIES_LIMIT, PDO::PARAM_INT);
@@ -38,7 +49,7 @@ try {
 $result = $movieSearch->fetchAll(PDO::FETCH_ASSOC);
 
 try {
-    exit(json_encode($result, JSON_THROW_ON_ERROR, RESULT_JSON_DEPTH));
+    exit(json_encode($result, JSON_THROW_ON_ERROR | JSON_NUMERIC_CHECK, RESULT_JSON_DEPTH));
 } catch (JsonException $e) {
     // TODO: use logger
     exit(json_encode(['error' => 'Oh no! We had Encode problem here.']));
