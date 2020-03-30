@@ -5,9 +5,6 @@ namespace DataBase;
 use \PDO;
 use \PDOException;
 
-use DataBaseInitException;
-use DataBaseNotInitedException;
-
 class DataBase
 {
     protected static $instance = null;
