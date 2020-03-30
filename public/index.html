@@ -37,52 +37,48 @@
         return Ajax('http://localhost:8080/getmovies.php');
     };
     const TreeBuilder = (root, movies) => {
-        const category = (item) => {
-            const cat = document.createElement('ul');
-            if (item) {
-                cat.appendChild(item);
+        const ul = (...children) => {
+            const ul = document.createElement('ul');
+            for (const child of children) {
+                ul.appendChild(child);
             }
-            return cat;
+            return ul;
         };
-        const item = (title) => {
+        const li = (title, ...children) => {
             const li = document.createElement('li');
             const span = document.createElement('span');
             span.innerText = title;
             li.appendChild(span);
+            for (const child of children) {
+                li.appendChild(child);
+            }
             return li;
         };
-
-        const moviesCat = item('фильмы');
-        const topCat = category(moviesCat);
-
-        const moviesWithPictureItem = item('фильмы с кадрами');
-        const moviesWithOutPictureItem = item('фильмы без кадров');
-
-        const moviesWithPictureCat = category();
-        const moviesWithOutPictureCat = category();
+        const moviesWithPictureCat = ul();
+        const moviesWithOutPictureCat = ul();
         for (const movie of movies) {
-            const movieItem = item(movie.title);
+            const movieItem = li(movie.title);
             if (movie.pictures) {
                 moviesWithPictureCat.appendChild(movieItem);
             } else {
                 moviesWithOutPictureCat.appendChild(movieItem);
             }
         }
-
-        moviesWithPictureItem.appendChild(moviesWithPictureCat);
-        moviesWithOutPictureItem.appendChild(moviesWithOutPictureCat);
-
-        topCat.appendChild(category(moviesWithPictureItem));
-        topCat.appendChild(category(moviesWithOutPictureItem));
-        return topCat;
+        return ul(
+            li('фильмы',
+                ul(
+                    li('фильмы с кадрами', moviesWithPictureCat),
+                    li('фильмы без кадров', moviesWithOutPictureCat)
+                )
+            )
+        );
     };
     const init = () => {
         const root = document.getElementById('root');
         GetMovies().then(movies => {
-            console.log(movies);
             const moviesTree = TreeBuilder(root, movies);
             root.appendChild(moviesTree);
-            Tree(moviesTree);
+            Tree(root);
         });
     };
     window.addEventListener('DOMContentLoaded', init);
