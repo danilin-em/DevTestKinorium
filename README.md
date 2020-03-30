@@ -72,8 +72,7 @@ SELECT
 FROM movie AS m 
 LEFT JOIN pictures AS p
     ON m.movie_id = p.movie_id
-    WHERE p.movie_id is NULL
-LIMIT 10;
+    WHERE p.movie_id is NULL;
 
 ```
 
