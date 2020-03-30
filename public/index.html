@@ -8,7 +8,7 @@
 
 <button id="reload">Reload</button>
 
-<ul id="moviesTree"></ul>
+<div id="root"></div>
 
 <script src="js/tree.js"></script>
 <script>
@@ -36,14 +36,52 @@
         // TODO use config instead hardcode
         return Ajax('http://localhost:8080/getmovies.php');
     };
-    const TreeBuilder = (root, items) => {
+    const TreeBuilder = (root, movies) => {
+        const category = (item) => {
+            const cat = document.createElement('ul');
+            if (item) {
+                cat.appendChild(item);
+            }
+            return cat;
+        };
+        const item = (title) => {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.innerText = title;
+            li.appendChild(span);
+            return li;
+        };
+
+        const moviesCat = item('фильмы');
+        const topCat = category(moviesCat);
+
+        const moviesWithPictureItem = item('фильмы с кадрами');
+        const moviesWithOutPictureItem = item('фильмы без кадров');
+
+        const moviesWithPictureCat = category();
+        const moviesWithOutPictureCat = category();
+        for (const movie of movies) {
+            const movieItem = item(movie.title);
+            if (movie.pictures) {
+                moviesWithPictureCat.appendChild(movieItem);
+            } else {
+                moviesWithOutPictureCat.appendChild(movieItem);
+            }
+        }
+
+        moviesWithPictureItem.appendChild(moviesWithPictureCat);
+        moviesWithOutPictureItem.appendChild(moviesWithOutPictureCat);
+
+        topCat.appendChild(category(moviesWithPictureItem));
+        topCat.appendChild(category(moviesWithOutPictureItem));
+        return topCat;
     };
     const init = () => {
-        const moviesTree = document.getElementById('moviesTree');
+        const root = document.getElementById('root');
         GetMovies().then(movies => {
             console.log(movies);
-            TreeBuilder(moviesTree, movies);
-            // TODO: use promise to catch moment for Tree registry
+            const moviesTree = TreeBuilder(root, movies);
+            root.appendChild(moviesTree);
             Tree(moviesTree);
         });
     };
