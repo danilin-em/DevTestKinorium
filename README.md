@@ -52,14 +52,16 @@ CREATE TABLE pictures (
 
 ```sql
 
-SELECT 
-  m.movie_id,
-  m.title
-FROM movie AS m 
-LEFT JOIN pictures AS p
-    ON m.movie_id = p.movie_id
-    WHERE p.movie_id is NULL
-LIMIT 10;
+SELECT
+    movie_id,
+    title
+FROM movie
+WHERE movie_id NOT IN (
+    SELECT movie_id
+    FROM pictures
+    WHERE movie.movie_id = pictures.movie_id
+    GROUP BY movie_id
+) LIMIT 10;
 
 ```
 
@@ -67,12 +69,15 @@ LIMIT 10;
 
 ```sql
 
-SELECT 
-  COUNT(m.movie_id) AS `count`
-FROM movie AS m 
-LEFT JOIN pictures AS p
-    ON m.movie_id = p.movie_id
-    WHERE p.movie_id is NULL;
+SELECT
+    COUNT(movie_id) AS count
+FROM movie
+WHERE movie_id NOT IN (
+    SELECT movie_id
+    FROM pictures
+    WHERE movie.movie_id = pictures.movie_id
+    GROUP BY movie_id
+);
 
 ```
 
